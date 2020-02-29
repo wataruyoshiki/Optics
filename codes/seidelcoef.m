@@ -1,6 +1,6 @@
 function abercoef = seidelcoef (lens1, lens2, gaussdata)
 
-  %% ------------- ƒŒƒ“ƒYƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ãƒ¬ãƒ³ã‚ºãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   r = lens1.r;                         
   b = lens1.b;           
   d = lens1.d;
@@ -9,7 +9,7 @@ function abercoef = seidelcoef (lens1, lens2, gaussdata)
   s_1 = lens2.s_1;
   t_1 = lens2.t_1;
   
-  %% ------------- ƒKƒEƒXŒõŠwŒvZƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   s = gaussdata.s;
   sd = gaussdata.sd;
   t = gaussdata.t;
@@ -22,15 +22,15 @@ function abercoef = seidelcoef (lens1, lens2, gaussdata)
   Md = gaussdata.Md;
 
 
-  %% ------------- •Ï”’è‹` ------------- %%
+  %% ------------- å¤‰æ•°å®šç¾© ------------- %%
   N = size(r,2);
-  B = zeros(1,N);               % ‹…–Êû·ŒW”
-  C = zeros(1,N);               % ”ñ“_û·ŒW”
-  D = zeros(1,N);               % ‘œ–Ê˜p‹Èû·ŒW”
-  E = zeros(1,N);               % ˜c‹Èû·ŒW”
-  F = zeros(1,N);               % ƒRƒ}û·ŒW”
+  B = zeros(1,N);               % çƒé¢åå·®ä¿‚æ•°
+  C = zeros(1,N);               % éç‚¹åå·®ä¿‚æ•°
+  D = zeros(1,N);               % åƒé¢æ¹¾æ›²åå·®ä¿‚æ•°
+  E = zeros(1,N);               % æ­ªæ›²åå·®ä¿‚æ•°
+  F = zeros(1,N);               % ã‚³ãƒåå·®ä¿‚æ•°
 
-  %% ------------- ƒUƒCƒfƒ‹û·ŒW”ŒvZ ------------- %%
+  %% ------------- ã‚¶ã‚¤ãƒ‡ãƒ«åå·®ä¿‚æ•°è¨ˆç®— ------------- %%
   for i=1:1:N
     if(i==1)
       N1 = n(1) - n_0;
@@ -54,12 +54,12 @@ function abercoef = seidelcoef (lens1, lens2, gaussdata)
   abercoef.E = E;
   abercoef.F = F;
 
-  %% ------------- Fû·ŒvZ ------------- %%
+  %% ------------- è‰²åå·®è¨ˆç®— ------------- %%
   if(isfield(lens1,'dn'))
     dn = lens1.dn;
     dn_0 = lens2.dn_0;
-    ds = zeros(1,N);               % ²ãFû·
-    dM = zeros(1,N);               % F”{—¦û·
+    ds = zeros(1,N);               % è»¸ä¸Šè‰²åå·®
+    dM = zeros(1,N);               % è‰²å€ç‡åå·®
     
     ds = -(1/n(end))*(sd(end)/h(end))^2*h.^2.*K.*(dn./n - [dn_0 dn(1:end-1)]./[n_0 n(1:end-1)]);
     ds_tot = sum(ds);

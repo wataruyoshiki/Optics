@@ -1,32 +1,32 @@
 clear all;
 close all;
 
-%% ------------- ƒpƒ‰ƒ[ƒ^’è‹`  ------------- %%
-r = [100 500];                % ‹È—¦”¼Œa (mm)
-b = [0 0];                    % ”ñ‹…–ÊŒW”
-d = [50 100];                 % –ÊŠÔŠu (mm)
-n = [1.44 1];                 % ‹üÜ—¦
+%% ------------- ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å®šç¾©  ------------- %%
+r = [100 500];                % æ›²ç‡åŠå¾„ (mm)
+b = [0 0];                    % éçƒé¢ä¿‚æ•°
+d = [50 100];                 % é¢é–“éš” (mm)
+n = [1.44 1];                 % å±ˆæŠ˜ç‡
 
-s_1 = -5000;                  % ‘æˆê–Ê‚©‚ç•¨‘Ì–Ê‚Ü‚Å‚Ì‹——£ (mm)
-t_1 = -0.00001;               % ‘æˆê–Ê‚©‚ç“üË“µ‚Ü‚Å‚Ì‹——£ (mm)
-n_0 = 1;                      % ‘æˆê–Ê‚©‚ç•¨‘Ì–Ê‚É‚¨‚¯‚é”}¿‚Ì‹üÜ—¦
-phi = deg2rad((0:2:20));      % ‰æŠp(”¼Šp) (rad.)
-EPD = 100;                    % “üË“µ’¼Œa (mm)
+s_1 = -5000;                  % ç¬¬ä¸€é¢ã‹ã‚‰ç‰©ä½“é¢ã¾ã§ã®è·é›¢ (mm)
+t_1 = -0.00001;               % ç¬¬ä¸€é¢ã‹ã‚‰å…¥å°„ç³ã¾ã§ã®è·é›¢ (mm)
+n_0 = 1;                      % ç¬¬ä¸€é¢ã‹ã‚‰ç‰©ä½“é¢ã«ãŠã‘ã‚‹åª’è³ªã®å±ˆæŠ˜ç‡
+phi = deg2rad((0:2:20));      % ç”»è§’(åŠè§’) (rad.)
+EPD = 100;                    % å…¥å°„ç³ç›´å¾„ (mm)
 
 isFigLens = 'y';
 isFigAber = 'n';
 isRaytrace = 'n';
 
 
-%% ------------- •Ï”’è‹` ------------- %%
-lambda_0 = 1;                       % 1ˆÈŠO‚Éİ’è‚µ‚È‚¢‚±‚ÆB
-N = size(r,2);                      % ‹üÜ–Ê”
-N_phi = size(phi,2);                % ‰æŠpğŒ”
-y_0 = n_0*lambda_0*tan(phi);        % ³‹K‰»‚³‚ê‚½•¨‘Ì–Ê‚É‚¨‚¯‚é•¨“_‚‚³
-Y_0 = (t_1-s_1)/(n_0*lambda_0)*y_0; % •¨‘Ì‚‚³
+%% ------------- å¤‰æ•°å®šç¾© ------------- %%
+lambda_0 = 1;                       % 1ä»¥å¤–ã«è¨­å®šã—ãªã„ã“ã¨ã€‚
+N = size(r,2);                      % å±ˆæŠ˜é¢æ•°
+N_phi = size(phi,2);                % ç”»è§’æ¡ä»¶æ•°
+y_0 = n_0*lambda_0*tan(phi);        % æ­£è¦åŒ–ã•ã‚ŒãŸç‰©ä½“é¢ã«ãŠã‘ã‚‹ç‰©ç‚¹é«˜ã•
+Y_0 = (t_1-s_1)/(n_0*lambda_0)*y_0; % ç‰©ä½“é«˜ã•
 
 
-%% ------------- ƒŒƒ“ƒYƒf[ƒ^‚ğƒoƒ“ƒhƒ‹ ------------- %%
+%% ------------- ãƒ¬ãƒ³ã‚ºãƒ‡ãƒ¼ã‚¿ã‚’ãƒãƒ³ãƒ‰ãƒ« ------------- %%
 lens1.r = r;                       
 lens1.b = b;           
 lens1.d = d;
@@ -36,9 +36,9 @@ lens2.s_1 = s_1;
 lens2.t_1 = t_1;
 
 
-%% ------------- ƒKƒEƒXŒõŠwŒvZ ------------- %%
+%% ------------- ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®— ------------- %%
 gaussdata = gauss (lens1,lens2);
-s = gaussdata.s;                    % ƒKƒEƒXŒõŠwŒvZƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹
+s = gaussdata.s;                    % ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ«
 sd = gaussdata.sd;
 t = gaussdata.t;
 td = gaussdata.td;
@@ -50,32 +50,32 @@ M = gaussdata.M;
 Md = gaussdata.Md;
 
 
-%% ------------- Œõ˜H}•`‰æ ------------- %%
+%% ------------- å…‰è·¯å›³æç”» ------------- %%
 if(isFigLens == 'y')
   figure;
-  %% ---- ²ãŒõü ---- %%
+  %% ---- è»¸ä¸Šå…‰ç·š ---- %%
   [tmp1, Yobj1, temp2, Yk1, Zk1] = raytrace3d (lens1, lens2, gaussdata, 0, EPD/2, 0);
   lensdraw(lens1, lens2, gaussdata, Yk1, Zk1, EPD, 0, Yobj1,'b-');
   [tmp1, Yobj1, temp2, Yk1, Zk1] = raytrace3d (lens1, lens2, gaussdata, 0, -EPD/2, 0);
   lensdraw(lens1, lens2, gaussdata, Yk1, Zk1, EPD, 0, Yobj1,'b-');
-  %% ---- ²ŠOŒõü ---- %%
+  %% ---- è»¸å¤–å…‰ç·š ---- %%
   [tmp1, Yobj2, temp2, Yk2, Zk2] = raytrace3d (lens1, lens2, gaussdata, max(y_0), EPD/2, 0);
   lensdraw(lens1, lens2, gaussdata, Yk2, Zk2, EPD, max(y_0), Yobj2,'b--');
   [tmp1, Yobj2, temp2, Yk2, Zk2] = raytrace3d (lens1, lens2, gaussdata, max(y_0), -EPD/2, 0);
   lensdraw(lens1, lens2, gaussdata, Yk2, Zk2, EPD, max(y_0), Yobj2,'b--');
 end
 
-%% ------------- û·ŒW”ŒvZ ------------- %%
+%% ------------- åå·®ä¿‚æ•°è¨ˆç®— ------------- %%
 [B, C, D, E, F] = seidelcoef(lens1, lens2, gaussdata);
 
 
-%% ------------- Àû·—ÊŒvZ ------------- %%
+%% ------------- å®Ÿåå·®é‡è¨ˆç®— ------------- %%
 for j=1:1:N_phi
   [DX(:,:,j), DY(:,:,j), Rho, Theta] = seidel2real (lens1, lens2, gaussdata, B, C, D, E, F, y_0(j), EPD);
 end
 
 
-%% ------------- ÀŒõü’ÇÕ ------------- %%
+%% ------------- å®Ÿå…‰ç·šè¿½è·¡ ------------- %%
 if(isRaytrace=='y')
   N_Theta = size(Theta,1);
   N_Rho = size(Rho,2);
@@ -90,15 +90,15 @@ if(isRaytrace=='y')
   end
 end
 
-%% ------------- cû·ŒvZ ------------- %%
+%% ------------- ç¸¦åå·®è¨ˆç®— ------------- %%
 [DZ_X, DZ_Y, Dist_Y] = lat2lon (DX, DY, gaussdata, Rho, Theta, Y_0);
 ##[DZ_X_rt, DZ_Y_rt, Dist_Y_rt] = lat2lon (DX_rt, DY_rt, gaussdata, Rho, Theta, Y_0);
 
-%% ------------- û·‹Èü•`‰æ ------------- %%
+%% ------------- åå·®æ›²ç·šæç”» ------------- %%
   if(isFigAber=='y')
-  %% ---- ‰¡û·‹Èü ---- %%
+  %% ---- æ¨ªåå·®æ›²ç·š ---- %%
   f1 = figure;
-  subplot(1,2,1);       % ƒ^ƒ“ƒWƒFƒ“ƒVƒƒƒ‹
+  subplot(1,2,1);       % ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ã‚·ãƒ£ãƒ«
   plot(Rho(1,:),DY(1,:,1),'b-',Rho(1,:),DY(1,:,fix(N_phi/2+1)),'r-',Rho(1,:),DY(1,:,end),'g-');
   hold on;
   plot(-Rho(3,:),DY(3,:,1),'b-',-Rho(3,:),DY(3,:,fix(N_phi/2+1)),'r-',-Rho(3,:),DY(3,:,end),'g-');
@@ -108,16 +108,16 @@ end
   legend([num2str(rad2deg(phi(1))) ' deg.'],[num2str(rad2deg(phi(fix(N_phi/2+1)))) ' deg.'],[num2str(rad2deg(phi(end))) ' deg.']);
   set(gca,'FontSize',16 );
 
-  subplot(1,2,2);       % ƒTƒWƒ^ƒ‹
+  subplot(1,2,2);       % ã‚µã‚¸ã‚¿ãƒ«
   plot(Rho(2,:),DX(2,:,1),'b-',Rho(2,:),DX(2,:,fix(N_phi/2+1)),'r-',Rho(2,:),DX(2,:,end),'g-');
   xlabel('ENP (mm)');
   ylabel('DX (mm)');
   legend([num2str(rad2deg(phi(1))) ' deg.'],[num2str(rad2deg(phi(fix(N_phi/2+1)))) ' deg.'],[num2str(rad2deg(phi(end))) ' deg.']);
   set(gca,'FontSize',16 );
 
-  %% ---- cû·‹Èü ---- %%
+  %% ---- ç¸¦åå·®æ›²ç·š ---- %%
   figure;
-  subplot(1,3,1);       % ‹…–Êû·
+  subplot(1,3,1);       % çƒé¢åå·®
   plot(DZ_Y(1,:,1),Rho(1,:),'b-');
   ##hold on;
   ##plot(DZ_Y_rt(1,:,1),Rho(1,:),'r-');
@@ -127,7 +127,7 @@ end
   ylabel('ENP (mm)');
   set(gca,'FontSize',16 );
 
-  subplot(1,3,2);       % ”ñ“_û·
+  subplot(1,3,2);       % éç‚¹åå·®
   plot(DZ_Y(1,end,:),rad2deg(phi),'b-', DZ_X(2,end,:),rad2deg(phi),'b--');
   ##hold on;
   ##plot(DZ_Y_rt(1,end,:),rad2deg(phi),'r-', DZ_X_rt(2,end,:),rad2deg(phi),'r--');
@@ -137,7 +137,7 @@ end
   legend('T','S');
   set(gca,'FontSize',16 );
 
-  subplot(1,3,3);       % ˜c‹Èû·
+  subplot(1,3,3);       % æ­ªæ›²åå·®
   plot(Dist_Y(1,1,:),rad2deg(phi),'b-');
   ##hold on;
   ##plot(Dist_Y_rt(1,1,:),rad2deg(phi),'r-');
@@ -149,12 +149,12 @@ end
 
   if(isRaytrace == 'y')
     figure(f1);
-    subplot(1,2,1);       % ƒ^ƒ“ƒWƒFƒ“ƒVƒƒƒ‹
+    subplot(1,2,1);       % ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ã‚·ãƒ£ãƒ«
     hold on;
     plot(Rho(1,:),DY_rt(1,:,1),'b--',Rho(1,:),DY_rt(1,:,fix(N_phi/2+1)),'r--',Rho(1,:),DY_rt(1,:,end),'g--');
     plot(-Rho(3,:),DY_rt(3,:,1),'b--',-Rho(3,:),DY_rt(3,:,fix(N_phi/2+1)),'r--',-Rho(3,:),DY_rt(3,:,end),'g--');
     hold off;
-    subplot(1,2,2);       % ƒTƒWƒ^ƒ‹
+    subplot(1,2,2);       % ã‚µã‚¸ã‚¿ãƒ«
     hold on;
     plot(Rho(2,:),DX_rt(2,:,1),'b--',Rho(2,:),DX_rt(2,:,fix(N_phi/2+1)),'r--',Rho(2,:),DX_rt(2,:,end),'g--');
     hold off;

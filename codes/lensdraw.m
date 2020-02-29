@@ -1,6 +1,6 @@
 function retval = lensdraw(lens1, lens2, gaussdata, Yk, Zk, EPD, y_0, Y_obj, line)
 
-  %% ------------- ƒŒƒ“ƒYƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ãƒ¬ãƒ³ã‚ºãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   r = lens1.r;                         
   b = lens1.b;           
   d = lens1.d;
@@ -9,7 +9,7 @@ function retval = lensdraw(lens1, lens2, gaussdata, Yk, Zk, EPD, y_0, Y_obj, lin
   s_1 = lens2.s_1;
   t_1 = lens2.t_1;
   
-  %% ------------- ƒKƒEƒXŒõŠwŒvZƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   s = gaussdata.s;
   sd = gaussdata.sd;
   t = gaussdata.t;
@@ -17,29 +17,29 @@ function retval = lensdraw(lens1, lens2, gaussdata, Yk, Zk, EPD, y_0, Y_obj, lin
   M = gaussdata.M;
   Md = gaussdata.Md;
 
-  N = size(r,2);      % ‹üÜ–Ê”
+  N = size(r,2);      % å±ˆæŠ˜é¢æ•°
   lambda_0 = 1;
-  Y_0 = (t_1-s_1)/(n_0*lambda_0)*y_0;                 % •¨‘Ì‚‚³
+  Y_0 = (t_1-s_1)/(n_0*lambda_0)*y_0;                 % ç‰©ä½“é«˜ã•
 
 
-  %% ------------- ƒŒƒ“ƒY‹y‚ÑŒõü‚Ì•`‰æ ------------- %%
+  %% ------------- ãƒ¬ãƒ³ã‚ºåŠã³å…‰ç·šã®æç”» ------------- %%
   hold on;
   for i=1:1:N
     if(i==1)
-    D = 0;              % Œ´“_(–Ê1)‚©‚ç‘ª’è‚µ‚½–Êi‚Ì‹——£(z²ã)
+    D = 0;              % åŸç‚¹(é¢1)ã‹ã‚‰æ¸¬å®šã—ãŸé¢iã®è·é›¢(zè»¸ä¸Š)
     else
       D = sum(d(1:i-1));
     end
     Y(i) = Yk(i);
-    Z(i) = D + Zk(i);   % Œ´“_(–Ê1)‚©‚ç‘ª’è‚µ‚½–Êi‚Ì“üË“_‚Ì‹——£(z²ã)
+    Z(i) = D + Zk(i);   % åŸç‚¹(é¢1)ã‹ã‚‰æ¸¬å®šã—ãŸé¢iã®å…¥å°„ç‚¹ã®è·é›¢(zè»¸ä¸Š)
 
-    %% ---- ƒŒƒ“ƒYŒ`ó•`‰æ ---- %%
+    %% ---- ãƒ¬ãƒ³ã‚ºå½¢çŠ¶æç”» ---- %%
     y = (-1.1:0.01:1.1)*abs(Yk(i));
     z = sign(-r(i))*sqrt(r(i)^2-y.^2) + D + r(i);
     plot(z,y,'k-');    
   end
   
-  %% ---- Œõü•`‰æ ---- %%
+  %% ---- å…‰ç·šæç”» ---- %%
   Y = [Y_0 Y Y_obj];
   Z = [s(1) Z sd(end)+sum(d(1:end-1))];
   if(abs(Z(1))>abs(Z(end)))
@@ -48,7 +48,7 @@ function retval = lensdraw(lens1, lens2, gaussdata, Yk, Zk, EPD, y_0, Y_obj, lin
   end
   plot(Z,Y,line);
 
-  %% ---- “üË/Ëo“µ•`‰æ ---- %%
+  %% ---- å…¥å°„/å°„å‡ºç³æç”» ---- %%
   Y_enp = [-EPD/2 EPD/2];
   Z_enp = [t(1) t(1)];
   Y_exp = [-Md*EPD/2 Md*EPD/2];
@@ -56,7 +56,7 @@ function retval = lensdraw(lens1, lens2, gaussdata, Yk, Zk, EPD, y_0, Y_obj, lin
   plot(Z_enp,Y_enp,'r-');
   plot(Z_exp,Y_exp,'g-');
   
-  %% ---- Œõ²•`‰æ ---- %%
+  %% ---- å…‰è»¸æç”» ---- %%
   plot([Z(1) Z(end)],[0 0],'k--');
   
   hold off;

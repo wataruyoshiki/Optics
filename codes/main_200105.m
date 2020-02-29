@@ -3,7 +3,7 @@ close all;
 pkg load statistics;
 
  
-%% ------------- ƒpƒ‰ƒ[ƒ^İ’è  ------------- %%
+%% ------------- ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š  ------------- %%
 l_F = 486.1;
 l_D = 589.2;
 l_C = 656.3;
@@ -16,10 +16,10 @@ n_b = RIcalc(glass_b,l_D);
 abbe_a = (RIcalc(glass_a,l_D)-1)/(RIcalc(glass_a,l_F)-RIcalc(glass_a,l_C));
 abbe_b = (RIcalc(glass_b,l_D)-1)/(RIcalc(glass_b,l_F)-RIcalc(glass_b,l_C));
 
-f = 100;      % ‘SŒnÅ“_‹——£ (mm)
-P = 1/100;    % ‘SŒnƒpƒ[ (1/mm)
+f = 100;      % å…¨ç³»ç„¦ç‚¹è·é›¢ (mm)
+P = 1/100;    % å…¨ç³»ãƒ‘ãƒ¯ãƒ¼ (1/mm)
 
-%% ------------- ƒpƒ[”z•ªŒˆ’è ------------- %%
+%% ------------- ãƒ‘ãƒ¯ãƒ¼é…åˆ†æ±ºå®š ------------- %%
 P_mat = inv([1/abbe_a 1/abbe_b; 1 1])*[0; P];
 P_a = P_mat(1);
 P_b = P_mat(2);
@@ -34,8 +34,8 @@ lens2.s_1 = -500000;
 conf.isFigLens = 'n';
 conf.isFigAber = 'n';
 conf.isRaytrace = 'n';
-theta = deg2rad(0);                   % ‰æŠp(”¼Šp) (rad.)
-EPD = 50;                             % “üË“µ’¼Œa (mm)
+theta = deg2rad(0);                   % ç”»è§’(åŠè§’) (rad.)
+EPD = 50;                             % å…¥å°„ç³ç›´å¾„ (mm)
 
 
 r_3 = [(-400:10:-50) (50:10:400)];
@@ -51,7 +51,7 @@ xlabel('r_3 (mm)'); ylabel('r_1, r_2 (mm)');
 legend('r_1','r_2');
 
 
-%% ------------- û·ŒW”ŒvZ ------------- %%
+%% ------------- åå·®ä¿‚æ•°è¨ˆç®— ------------- %%
 N = size(r_3,2);
 M = size(t_1,1);
 B = zeros(M,N);
@@ -76,7 +76,7 @@ end
 
 
 
-##%% ------------- ƒOƒ‰ƒt•`‰æ ------------- %%
+##%% ------------- ã‚°ãƒ©ãƒ•æç”» ------------- %%
 ##figure;
 ##subplot(5,1,1); plot(r_2,B,'bo');
 ##xlabel('r_2 (mm)'); title('Spherical aber.');

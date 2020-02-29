@@ -1,6 +1,6 @@
 function [DZ_X, DZ_Y, Dist_Y] = lat2lon (DX, DY, gaussdata, Rho, Theta, Y_0)
 
-  %% ------------- ガウス光学計算データをアンバンドル ------------- %%
+  %% ------------- 繧ｬ繧ｦ繧ｹ蜈牙ｭｦ險育ｮ励ョ繝ｼ繧ｿ繧偵い繝ｳ繝舌Φ繝峨Ν ------------- %%
   s = gaussdata.s;
   sd = gaussdata.sd;
   t = gaussdata.t;

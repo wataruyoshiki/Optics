@@ -1,6 +1,6 @@
 function [DX, DY, Rho, Theta] = seidel2real (lens1, lens2, gaussdata, abercoef, y_0, EPD)
 
-  %% ------------- ƒŒƒ“ƒYƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ãƒ¬ãƒ³ã‚ºãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   r = lens1.r;                         
   b = lens1.b;           
   d = lens1.d;
@@ -9,7 +9,7 @@ function [DX, DY, Rho, Theta] = seidel2real (lens1, lens2, gaussdata, abercoef, 
   s_1 = lens2.s_1;
   t_1 = lens2.t_1;
 
-  %% ------------- ƒKƒEƒXŒõŠwŒvZƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   s = gaussdata.s;
   sd = gaussdata.sd;
   t = gaussdata.t;
@@ -17,7 +17,7 @@ function [DX, DY, Rho, Theta] = seidel2real (lens1, lens2, gaussdata, abercoef, 
   M = gaussdata.M;
   Md = gaussdata.Md;
 
-  %% ------------- û·ŒW”ƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- åå·®ä¿‚æ•°ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   B = abercoef.B;
   C = abercoef.C;
   D = abercoef.D;
@@ -25,13 +25,13 @@ function [DX, DY, Rho, Theta] = seidel2real (lens1, lens2, gaussdata, abercoef, 
   F = abercoef.F;
 
   lambda_0 = 1;
-  B_tot = sum(B);     % û·ŒW”‚ÌŠe–Ê‡Œv
+  B_tot = sum(B);     % åå·®ä¿‚æ•°ã®å„é¢åˆè¨ˆ
   C_tot = sum(C);
   D_tot = sum(D);
   E_tot = sum(E);
   F_tot = sum(F);
 
-  rho = [0.000001 (0.01:0.01:1)]*(EPD/2);    % Ëo“µ‚É‚¨‚¯‚éŒa•ûŒü¬•ª (mm)
+  rho = [0.000001 (0.01:0.01:1)]*(EPD/2);    % å°„å‡ºç³ã«ãŠã‘ã‚‹å¾„æ–¹å‘æˆåˆ† (mm)
   theta = deg2rad([0 90 180 270 (0:15:360)])';
   [Rho, Theta] = meshgrid(rho,theta);
   Dx = B_tot*Rho.^3.*sin(Theta) - 2*F_tot*y_0*Rho.^2.*sin(Theta).*cos(Theta) + D_tot*y_0^2*Rho.*sin(Theta);

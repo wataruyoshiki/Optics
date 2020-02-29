@@ -1,8 +1,8 @@
 function n = RIcalc (glass, lambda)
-%% lambda: ”g’· (nm)
-%% glass: ÉŞ–¼ (•¶š—ñ)
+%% lambda: æ³¢é•· (nm)
+%% glass: ç¡æå (æ–‡å­—åˆ—)
 
-  l = lambda*10^-3;       % ”g’· (um)
+  l = lambda*10^-3;       % æ³¢é•· (um)
   
   if(strcmp(glass,'NBK-7'))
     n_1 = 1.03961212*l^2/(l^2 - 0.00600069867);

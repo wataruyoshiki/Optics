@@ -1,7 +1,7 @@
 function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, conf)
 
 
-  %% ------------- ƒŒƒ“ƒYƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹ ------------- %%
+  %% ------------- ãƒ¬ãƒ³ã‚ºãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ« ------------- %%
   r = lens1.r;                         
   b = lens1.b;           
   d = lens1.d;
@@ -14,17 +14,17 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
   isRaytrace = conf.isRaytrace;
   
 
-  %% ------------- •Ï”’è‹` ------------- %%
-  lambda_0 = 1;                       % 1ˆÈŠO‚Éİ’è‚µ‚È‚¢‚±‚ÆB
-  N = size(r,2);                      % ‹üÜ–Ê”
-  N_phi = size(phi,2);                % ‰æŠpğŒ”
-  y_0 = n_0*lambda_0*tan(phi);        % ³‹K‰»‚³‚ê‚½•¨‘Ì–Ê‚É‚¨‚¯‚é•¨“_‚‚³
-  Y_0 = (t_1-s_1)/(n_0*lambda_0)*y_0; % •¨‘Ì‚‚³
+  %% ------------- å¤‰æ•°å®šç¾© ------------- %%
+  lambda_0 = 1;                       % 1ä»¥å¤–ã«è¨­å®šã—ãªã„ã“ã¨ã€‚
+  N = size(r,2);                      % å±ˆæŠ˜é¢æ•°
+  N_phi = size(phi,2);                % ç”»è§’æ¡ä»¶æ•°
+  y_0 = n_0*lambda_0*tan(phi);        % æ­£è¦åŒ–ã•ã‚ŒãŸç‰©ä½“é¢ã«ãŠã‘ã‚‹ç‰©ç‚¹é«˜ã•
+  Y_0 = (t_1-s_1)/(n_0*lambda_0)*y_0; % ç‰©ä½“é«˜ã•
 
 
-  %% ------------- ƒKƒEƒXŒõŠwŒvZ ------------- %%
+  %% ------------- ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®— ------------- %%
   gaussdata = gauss (lens1,lens2);
-  s = gaussdata.s;                    % ƒKƒEƒXŒõŠwŒvZƒf[ƒ^‚ğƒAƒ“ƒoƒ“ƒhƒ‹
+  s = gaussdata.s;                    % ã‚¬ã‚¦ã‚¹å…‰å­¦è¨ˆç®—ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¢ãƒ³ãƒãƒ³ãƒ‰ãƒ«
   sd = gaussdata.sd;
   t = gaussdata.t;
   td = gaussdata.td;
@@ -36,22 +36,22 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
   Md = gaussdata.Md;
 
 
-  %% ------------- Œõ˜H}•`‰æ ------------- %%
+  %% ------------- å…‰è·¯å›³æç”» ------------- %%
   if(isFigLens == 'y')
     figure;
-    %% ---- ²ãŒõü ---- %%
+    %% ---- è»¸ä¸Šå…‰ç·š ---- %%
     [tmp1, Yobj1, temp2, Yk1, Zk1] = raytrace3d (lens1, lens2, gaussdata, 0, EPD/2, 0);
     lensdraw(lens1, lens2, gaussdata, Yk1, Zk1, EPD, 0, Yobj1,'b-');
     [tmp1, Yobj1, temp2, Yk1, Zk1] = raytrace3d (lens1, lens2, gaussdata, 0, -EPD/2, 0);
     lensdraw(lens1, lens2, gaussdata, Yk1, Zk1, EPD, 0, Yobj1,'b-');
-    %% ---- ²ŠOŒõü ---- %%
+    %% ---- è»¸å¤–å…‰ç·š ---- %%
     [tmp1, Yobj2, temp2, Yk2, Zk2] = raytrace3d (lens1, lens2, gaussdata, max(y_0), EPD/2, 0);
     lensdraw(lens1, lens2, gaussdata, Yk2, Zk2, EPD, max(y_0), Yobj2,'b--');
     [tmp1, Yobj2, temp2, Yk2, Zk2] = raytrace3d (lens1, lens2, gaussdata, max(y_0), -EPD/2, 0);
     lensdraw(lens1, lens2, gaussdata, Yk2, Zk2, EPD, max(y_0), Yobj2,'b--');
   end
 
-  %% ------------- û·ŒW”ŒvZ ------------- %%
+  %% ------------- åå·®ä¿‚æ•°è¨ˆç®— ------------- %%
   abercoef = seidelcoef(lens1, lens2, gaussdata);
 ##  abercoef.B = B;
 ##  abercoef.C = C;
@@ -60,7 +60,7 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
 ##  abercoef.F = F;
 
 
-  %% ------------- Àû·—ÊŒvZ ------------- %%
+  %% ------------- å®Ÿåå·®é‡è¨ˆç®— ------------- %%
   for j=1:1:N_phi
     [DX(:,:,j), DY(:,:,j), Rho, Theta] = seidel2real (lens1, lens2, gaussdata, abercoef, y_0(j), EPD);
   end
@@ -70,7 +70,7 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
   aberdata.Theta = Theta; 
 
 
-  %% ------------- ÀŒõü’ÇÕ ------------- %%
+  %% ------------- å®Ÿå…‰ç·šè¿½è·¡ ------------- %%
   if(isRaytrace=='y')
     N_Theta = size(Theta,1);
     N_Rho = size(Rho,2);
@@ -87,7 +87,7 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
     aberdata.DY_rt = DY_rt;
   end
 
-  %% ------------- cû·ŒvZ ------------- %%
+  %% ------------- ç¸¦åå·®è¨ˆç®— ------------- %%
   [DZ_X, DZ_Y, Dist_Y] = lat2lon (DX, DY, gaussdata, Rho, Theta, Y_0);
   aberdata.DZ_X = DZ_X;
   aberdata.DZ_Y = DZ_Y;
@@ -95,11 +95,11 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
   ##[DZ_X_rt, DZ_Y_rt, Dist_Y_rt] = lat2lon (DX_rt, DY_rt, gaussdata, Rho, Theta, Y_0);
 
   
-  %% ------------- û·‹Èü•`‰æ ------------- %%
+  %% ------------- åå·®æ›²ç·šæç”» ------------- %%
     if(isFigAber=='y')
-    %% ---- ‰¡û·‹Èü ---- %%
+    %% ---- æ¨ªåå·®æ›²ç·š ---- %%
     f1 = figure;
-    subplot(1,2,1);       % ƒ^ƒ“ƒWƒFƒ“ƒVƒƒƒ‹
+    subplot(1,2,1);       % ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ã‚·ãƒ£ãƒ«
     plot(Rho(1,:),DY(1,:,1),'b-',Rho(1,:),DY(1,:,fix(N_phi/2+1)),'r-',Rho(1,:),DY(1,:,end),'g-');
     hold on;
     plot(-Rho(3,:),DY(3,:,1),'b-',-Rho(3,:),DY(3,:,fix(N_phi/2+1)),'r-',-Rho(3,:),DY(3,:,end),'g-');
@@ -109,16 +109,16 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
     legend([num2str(rad2deg(phi(1))) ' deg.'],[num2str(rad2deg(phi(fix(N_phi/2+1)))) ' deg.'],[num2str(rad2deg(phi(end))) ' deg.']);
     set(gca,'FontSize',16 );
 
-    subplot(1,2,2);       % ƒTƒWƒ^ƒ‹
+    subplot(1,2,2);       % ã‚µã‚¸ã‚¿ãƒ«
     plot(Rho(2,:),DX(2,:,1),'b-',Rho(2,:),DX(2,:,fix(N_phi/2+1)),'r-',Rho(2,:),DX(2,:,end),'g-');
     xlabel('ENP (mm)');
     ylabel('DX (mm)');
     legend([num2str(rad2deg(phi(1))) ' deg.'],[num2str(rad2deg(phi(fix(N_phi/2+1)))) ' deg.'],[num2str(rad2deg(phi(end))) ' deg.']);
     set(gca,'FontSize',16 );
 
-    %% ---- cû·‹Èü ---- %%
+    %% ---- ç¸¦åå·®æ›²ç·š ---- %%
     figure;
-    subplot(1,3,1);       % ‹…–Êû·
+    subplot(1,3,1);       % çƒé¢åå·®
     plot(DZ_Y(1,:,1),Rho(1,:),'b-');
     ##hold on;
     ##plot(DZ_Y_rt(1,:,1),Rho(1,:),'r-');
@@ -128,7 +128,7 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
     ylabel('ENP (mm)');
     set(gca,'FontSize',16 );
 
-    subplot(1,3,2);       % ”ñ“_û·
+    subplot(1,3,2);       % éç‚¹åå·®
     plot(DZ_Y(1,end,:),rad2deg(phi),'b-', DZ_X(2,end,:),rad2deg(phi),'b--');
     ##hold on;
     ##plot(DZ_Y_rt(1,end,:),rad2deg(phi),'r-', DZ_X_rt(2,end,:),rad2deg(phi),'r--');
@@ -138,7 +138,7 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
     legend('T','S');
     set(gca,'FontSize',16 );
 
-    subplot(1,3,3);       % ˜c‹Èû·
+    subplot(1,3,3);       % æ­ªæ›²åå·®
     plot(Dist_Y(1,1,:),rad2deg(phi),'b-');
     ##hold on;
     ##plot(Dist_Y_rt(1,1,:),rad2deg(phi),'r-');
@@ -150,12 +150,12 @@ function [aberdata, abercoef, gaussdata] = abercalc (lens1, lens2, phi, EPD, con
 
     if(isRaytrace == 'y')
       figure(f1);
-      subplot(1,2,1);       % ƒ^ƒ“ƒWƒFƒ“ƒVƒƒƒ‹
+      subplot(1,2,1);       % ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ã‚·ãƒ£ãƒ«
       hold on;
       plot(Rho(1,:),DY_rt(1,:,1),'b--',Rho(1,:),DY_rt(1,:,fix(N_phi/2+1)),'r--',Rho(1,:),DY_rt(1,:,end),'g--');
       plot(-Rho(3,:),DY_rt(3,:,1),'b--',-Rho(3,:),DY_rt(3,:,fix(N_phi/2+1)),'r--',-Rho(3,:),DY_rt(3,:,end),'g--');
       hold off;
-      subplot(1,2,2);       % ƒTƒWƒ^ƒ‹
+      subplot(1,2,2);       % ã‚µã‚¸ã‚¿ãƒ«
       hold on;
       plot(Rho(2,:),DX_rt(2,:,1),'b--',Rho(2,:),DX_rt(2,:,fix(N_phi/2+1)),'r--',Rho(2,:),DX_rt(2,:,end),'g--');
       hold off;
